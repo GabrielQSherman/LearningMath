@@ -7,9 +7,9 @@ window.onload = function() {
         context.fillStyle = "black";
         context.fillRect(0,0,width,height);
 
-      //  context.translate((width / 2), height /2);
+       context.translate((width / 2), height /2);
 
-            for (let i = 0; i < 333; i++) {
+            for (let i = 0; i < 1481; i++) {
                 context.strokeStyle = "white";
                 context.beginPath();
                 context.moveTo(0,0)
