@@ -3,7 +3,7 @@ window.onload = function () {
         context = canvas.getContext("2d"),
         width = canvas.width = this.innerWidth, //this refers to window
         height = canvas.height = this.innerHeight,
-        time = 180;
+        time = 100;
 
         context.strokeStyle = "white";
 
@@ -15,20 +15,22 @@ window.onload = function () {
             context.moveTo(size, size);
 
             for (let i = 0; i < 5; i++) {
-                    context.rotate(Math.PI / 2)
+                    context.rotate(Math.PI / 3);
                     context.lineTo(size, size);
 
             }
-            context.stroke()
+
+            context.stroke();
         }
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 10; i++) {
             time++
 
+            
             for (let numOfObj = 0; numOfObj < 10; numOfObj++) {
                 
                 context.save()
-                context.translate(width, height + (i * 50));
+                context.translate(width + (i * 50), height + (i * 50));
                 // context.rotate(.1);
                 createSq(time);
                 context.restore
@@ -37,5 +39,29 @@ window.onload = function () {
             }
             
         }
+
+        function render() {
+            time++
+
+
+            for (let i = 0; i < 20; i++) {
+            
+
+                for (let numOfObj = 0; numOfObj < 10; numOfObj++) {
+                    
+                    context.save()
+                    context.translate(width, height + (i * time));
+                    // context.rotate(.1);
+                    createSq(time);
+                    context.restore
+                    
+                    
+                }
+            
+            }
+
+        }
+
+        setTimeout( window.requestAnimationFrame , 100, render());
 
 }
