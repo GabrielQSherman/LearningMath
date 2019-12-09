@@ -12,31 +12,55 @@ window.onload = function () {
         context.translate(width/2, height/2);
         // context.rotate((-15 * Math.PI) / 180);
 
+        let originX = 0,
+            originY = 0;
+
         //first stick
 
-        context.beginPath();
+        function create_branch(size) {
+            context.beginPath();
 
-        context.moveTo(0,0);
+            context.moveTo(originX, originY + size));
 
-        context.lineTo(100,0);
+            context.lineTo(originX, originY);
 
-        context.stroke();
 
-        //first branch
 
-        for (let i = 0; i < 5; i++) {
+            context.stroke();
+        }
+
+        create_branch(100);
+
+        //first leaf
+
+        for (let i = 0; i < 101; i++) {
+            context.save();
+            
+            context.beginPath();
+
             context.moveTo(100,0);
 
-            context.save();
-
-            context.rotate(Math.PI / i);
-
-            context.lineTo(200, 0);
+            context.lineTo((Math.sin(i) * 100) + 200, Math.cos(i) * 30);
 
             context.stroke();
 
             context.restore();
+            
         }
+
+        // for (let i = 0; i < 5; i++) {
+        //     context.moveTo(100,0);
+
+        //     context.save();
+
+        //     context.rotate(Math.PI / 4);
+
+        //     context.lineTo(200, 0);
+
+        //     context.stroke();
+
+        //     context.restore();
+        // }
 
         // context.moveTo(100,0);
 
