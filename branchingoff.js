@@ -9,74 +9,81 @@ window.onload = function () {
 
         context.strokeStyle = 'white';
 
-        context.translate(width/2, height/2);
-        // context.rotate((-15 * Math.PI) / 180);
 
+        //setting up the canvas so the image looks good
+        context.translate(width/2, 100);
+        context.rotate(Math.PI);
+
+        //the 'tree' will start at the center of the canvas
         let originX = 0,
             originY = 0;
 
-        //first stick
-
+        //function that creates a tree branch (one vertical, two horiz) and calls the leaf creating function for the horizontal branches
         function create_branch(size) {
-            context.beginPath();
 
-            context.moveTo(originX, originY + size));
+            context.translate(0,-size);
 
-            context.lineTo(originX, originY);
+            for (let i = 0; i < 3; i++) {
 
+                context.save();
 
+                context.rotate(((90 * i - 90) * (Math.PI/180)));
 
-            context.stroke();
+                context.beginPath();
+                
+                context.moveTo(originX, originY + size);
+
+                context.lineTo(originX, originY);
+
+                context.stroke();
+
+                if (i != 1) {
+                    create_leaf(originX, originY, size);
+                }
+
+                context.restore();
+                
+            }
         }
 
-        create_branch(100);
 
         //first leaf
 
-        for (let i = 0; i < 101; i++) {
+        function create_leaf(x,y, leafSize) {
+
+            context.rotate(90 * (Math.PI / 180));
+
+             for (let i = 0; i < 20; i++) {
+
+                 context.strokeStyle = 'hsl(' + 150 + (i * 20) + ', 100%, 80%)';
+
             context.save();
             
             context.beginPath();
 
-            context.moveTo(100,0);
+            context.moveTo(x + leafSize, y);
 
-            context.lineTo((Math.sin(i) * 100) + 200, Math.cos(i) * 30);
+            context.lineTo((Math.sin(i) * leafSize) + leafSize * 2, Math.cos(i) * (leafSize/ 3));
 
             context.stroke();
 
             context.restore();
             
+         }
+            
         }
 
-        // for (let i = 0; i < 5; i++) {
-        //     context.moveTo(100,0);
 
-        //     context.save();
+        //for loop that creates the 
+        for (let i = 10; i < 400; i+=15) {
+           
+           create_branch(i);
+        //    create_branch((i + (i+30))/2)
+            
+        }
 
-        //     context.rotate(Math.PI / 4);
-
-        //     context.lineTo(200, 0);
-
-        //     context.stroke();
-
-        //     context.restore();
-        // }
-
-        // context.moveTo(100,0);
-
-        // context.save();
-
-        // context.rotate(Math.PI / 4);
-
-        // context.lineTo(200, 0);
-
-        // context.stroke();
-
-        // context.restore();
-
-
-
-    
         
+       
+
 
 }
